@@ -72,12 +72,12 @@ function Compiler (handleImportCall) {
 
   function onInternalCompilerLoaded () {
     if (worker === null) {
-      var compiler
-      var userAgent = (typeof (navigator) !== 'undefined') && navigator.userAgent ? navigator.userAgent.toLowerCase() : '-'
-      if (typeof (window) === 'undefined' || userAgent.indexOf(' electron/') > -1) {
-        compiler = require('solc')
+      var compiler;
+      var userAgent = typeof navigator !== 'undefined' && navigator.userAgent ? navigator.userAgent.toLowerCase() : '-';
+      if (typeof window === 'undefined') {
+        compiler = require('solc');
       } else {
-        compiler = solc(window.Module)
+        compiler = solc(window.Module);
       }
 
       compileJSON = function (source, optimize, cb) {
